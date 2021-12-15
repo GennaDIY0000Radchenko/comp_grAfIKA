@@ -6,21 +6,21 @@ def rotate(a, b, c):
 
 
 def algorithm(array_input):
-    n = len(array_input)  # число точек
-    P = [m for m in range(n)]  # список номеров точек
+    n = len(array_input)
+    P = [m for m in range(n)]
     for p in range(1, n):
-        if array_input[P[p]][0] < array_input[P[0]][0]:  # если P[i]-ая точка лежит левее P[0]-ой точки
-            P[p], P[0] = P[0], P[p]  # меняем местами номера этих точек
-    for k in range(2, n):  # сортировка вставкой
+        if array_input[P[p]][0] < array_input[P[0]][0]:
+            P[p], P[0] = P[0], P[p]
+    for k in range(2, n):
         j = k
         while j > 1 and (rotate(array_input[P[0]], array_input[P[j - 1]], array_input[P[j]]) < 0):
             P[j], P[j - 1] = P[j - 1], P[j]
             j -= 1
-    S = [P[0], P[1]]  # создаем стек
+    S = [P[0], P[1]]
     for h in range(2, n):
         while rotate(array_input[S[-2]], array_input[S[-1]], array_input[P[h]]) < 0:
-            del S[-1]  # pop(S)
-        S.append(P[h])  # push(S,P[i])
+            del S[-1]
+        S.append(P[h])
     return S
 
 
